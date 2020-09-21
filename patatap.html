@@ -13,7 +13,6 @@
 	<!-- howler.js -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.4/howler.js"></script>
   
-
 	<link rel="stylesheet" type="text/css" href="patatap.css">
 
 	<script type="text/paperscript" canvas="myCanvas">
@@ -49,6 +48,22 @@
 
 		var balls = [];	
 
+		function onMouseDown(event) {
+			var key = Math.floor(Math.random() * keyData.length);
+
+			console.log('You pressed the mouse!');
+			var position = Point.random() * view.size;
+			var vector = new Point({
+				angle: 360 * Math.random(),
+				length: Math.random() * 10
+			});
+			var radius = Math.random() * 60 + 60;
+			var newBall = new Ball(radius, position, vector);
+			balls.push(newBall);
+		}
+
+
+		//mobile friendly - TODO: add random keypress sound
 		function onKeyDown(event) {
 			if(keyData[event.key]) {
 				myCanvas.style.backgroundColor = keyData[event.key].color;
@@ -192,9 +207,12 @@
 </head>
 <body>
 	<div id="clear_canvas">
-			<h3 id="enter_text">C L E A R</h3>
-		</div>
+			<button id="enter_text" style="">cleanup</button>
+	</div>
+	<p id="txt" style="">press a keyboard key 'a-z'</p>
 	<canvas id="myCanvas" resize></canvas>
+
+
 
 <script type="text/javascript">
 	var clr = document.querySelector("#clear_canvas");
@@ -203,4 +221,5 @@
 	});
 </script>
 </body>
+</html>
 </html>
